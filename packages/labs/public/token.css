@@ -3,10 +3,22 @@
     --color-font-page: #3c7fd1;
     --color-background-header: #3c7fd1;
     --color-font-header: #357531;
+    --color-underline-header: #000000;
     --color-font-link: #753231;
     --color-background-nav: #61be77;
     --color-font-nav: #3c7fd1;
     --size-font-page: 1em;
     --font-font-title: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     --font-font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.dark-mode {
+    --color-background-page: #091B22; 
+    --color-font-page: #E0F5FF; 
+    --color-background-header: #0A2953; 
+    --color-font-header: #B3ECA1; 
+    --color-underline-header: #FFFFFF; 
+    --color-font-link: #FF927A; 
+    --color-background-nav: #124E2F; 
+    --color-font-nav: #91C3F5; 
 }

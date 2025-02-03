@@ -11,7 +11,6 @@ body {
 
 h1 {
     font-family: vars(--font-font-title);
-    background-color: var(--color-background-header);
 }
 
 h1>a {
@@ -28,22 +27,55 @@ a {
     color: var(--color-font-link);
 }
 
+header {
+    background-color: var(--color-background-nav);
+
+}
+
 .navbar {
     background-color: var(--color-background-nav);
-    display: flex;
-    flex-wrap: wrap;
     padding: 0;
-    color: (--color-font-nav);
+    color: var(--color-font-nav);
+    display: hidden;
+}
+
+.menu-btn {
+    padding: 1em;
+    margin: 1em;
+}
+
+@media (max-width: 600px) {
+    .navbar.hidden {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) {
+    .menu-btn {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .navItem {
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+    }
+
+    .navItem.active {
+        border-bottom: .1em solid var(--color-underline-header); 
+    }
 }
 
 .navItem {
     justify-content: space-between;
-    list-style-type: none;
     margin: 0;
     padding: 1em;
-    flex-wrap: wrap;
-    display: flex;
-    flex-direction: row;
     text-align: center;
 }
 
