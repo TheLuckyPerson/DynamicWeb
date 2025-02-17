@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+th, td {
+    padding-left: 12px; /* Adjust value as needed */
+    padding-right: 12px; /* Adjust value as needed */
+}
