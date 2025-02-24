@@ -1,9 +1,11 @@
+import me from "./assets/image.png";
+
 function About()
 {
     return (
         <div class="container">
             <div class="item item-1">
-                <img alt="Tyler Le" src="./assets/image.png"></img>
+                <img alt="Tyler Le" src={me}></img>
             </div>
 
             <dl class="item info item-2">
