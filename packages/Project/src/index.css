@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+body {
+    background-color: var(--color-background-page);
+    font-family: var(--font-font-body);
+    color: var(--color-font-page);
+}
+
+header {
+    color: #ffffff;
+    background-color: var(--color-background-nav);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.headerButton {
+    display: flex;
+    padding: 5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--color-background-nav);
+}
+
+.button {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: 0.25rem;
+    color: var(--color-text-button);
+    background-color: var(--color-button);
+}
+
+.dicePickContainer {
+    position: relative;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: 0.25rem;
+    color: var(--color-text-button);
+}
+
+.addRemoveButtonContainer {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.addRemoveButton {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+}
+
+.diceSelectionRowContainer {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    gap: 1rem;
+}
+
+.rolledDiceDisplay {
+    display: grid;
+    padding: 1.25rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+    background-color: var(--color-background-diceDisplay);
+}
+
+@media (min-width: 640px) {
+    .diceSelectionRowContainer {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+    }
+
+    .rolledDiceDisplay {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .diceSelectionRowContainer {
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+
+    .rolledDiceDisplay {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    nav>ul {
+        flex-direction: row;
+
+    }
+}
+
+@media (min-width: 1280px) {
+    .diceSelectionRowContainer {
+        grid-template-columns: repeat(5, minmax(200px, 1fr));
+    }
+
+    .rolledDiceDisplay {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
