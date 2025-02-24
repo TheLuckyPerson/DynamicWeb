@@ -1,9 +1,104 @@
 @import "tailwindcss";
+* { 
+    margin: 0; 
+    padding: 0
+}
+
+h1 {
+    font-family: vars(--font-font-title);
+}
+
+h1>a {
+    font-size: var(--size-font-page);
+}
+
+h2 {
+    color: var(--color-font-header);
+    font-family: var(--font-font-title);
+    padding: 0em .2em;
+}
+
+a {
+    color: var(--color-font-link);
+}
+
+header {
+    background-color: var(--color-background-nav);
+
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(100px, 1fr));
+    grid-template-rows: repeat(4, minmax(100px, 1fr));
+    margin: 1em;
+}
+
+.item-1 {
+    grid-area: 1 / 1 / 1 / 1;
+}
+
+.item-2 {
+    grid-area: 2 / 1 / 2 / 1;
+
+}
+
+.item-3 {
+    grid-area: 3 / 1 / 3 / 1;
+}
+
+.item-4 {
+    grid-area: 4 / 1 / 4 / 1;
+}
+
+.info {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin: 0em;
+    height: 2em;
+    max-height: 2em;
+    width: 18em;
+    max-width: 20em;
+}
+
+.info > .item-1 {
+    grid-area: 1 / 1 / 1 / 1
+}
+
+.info > .item-2 {
+    grid-area: 2 / 1 / 2 / 1
+}
+
+.info > .item-3 {
+    grid-area: 3 / 1 / 3 / 1
+}
+
+.info > .item-4 {
+    grid-area: 4 / 1 / 4 / 1
+}
+
+.info > .item-5 {
+    grid-area: 1 / 2 / 1 / 2;
+}
+
+.info > .item-6 {
+    grid-area: 2 / 2 / 2 / 2;
+}
+
+.info > .item-7 {
+    grid-area: 3 / 2 / 3 / 2;
+}
+
+.info > .item-8 {
+    grid-area: 4 / 2 / 4 / 2;
+}
 
 body {
     background-color: var(--color-background-page);
     font-family: var(--font-font-body);
     color: var(--color-font-page);
+    width: 100%
 }
 
 header {
@@ -12,14 +107,11 @@ header {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.headerButton {
-    display: flex;
-    padding: 5rem;
-    flex-direction: row;
-    flex-wrap: wrap;
+.navItem {
+    justify-content: space-between;
+    margin: 0;
+    padding: 2em 5em;
     text-align: center;
-    justify-content: center;
-    background-color: var(--color-background-nav);
 }
 
 .button {
@@ -46,6 +138,10 @@ header {
     color: var(--color-text-button);
 }
 
+.dicePickContainer.selected {
+    background-color: var(--color-background-dicepick);
+}
+
 .addRemoveButtonContainer {
     display: flex;
     position: absolute;
@@ -68,7 +164,7 @@ header {
 
 .diceSelectionRowContainer {
     display: grid;
-    grid-template-columns: repeat(1, minmax(200px, 1fr));
+    grid-template-columns: 1;
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 700;
@@ -77,29 +173,62 @@ header {
 
 .rolledDiceDisplay {
     display: grid;
+    margin: 1em;
     padding: 1.25rem;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: 1;
     gap: 1rem;
     background-color: var(--color-background-diceDisplay);
 }
 
 @media (min-width: 640px) {
+    .menu-btn {
+        display: none;
+    }
+
     .diceSelectionRowContainer {
-        grid-template-columns: repeat(2, minmax(150px, 1fr));
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
     }
 
     .rolledDiceDisplay {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .navItem {
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+    }
+
+    .navItem.active {
+        border-bottom: .1em solid var(--color-underline-header); 
+    }
+
+    .container {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+
+    .item-3 {
+        grid-area: 1 / 2 / 1 / 2;
+    }
+    
+    .item-4 {
+        grid-area: 3 / 2 / 3 / 2;
     }
 }
 
 @media (min-width: 1024px) {
     .diceSelectionRowContainer {
-        grid-template-columns: repeat(3, minmax(150px, 1fr));
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
     }
 
     .rolledDiceDisplay {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
     }
 
     nav>ul {
@@ -110,7 +239,7 @@ header {
 
 @media (min-width: 1280px) {
     .diceSelectionRowContainer {
-        grid-template-columns: repeat(5, minmax(200px, 1fr));
+        grid-template-columns: repeat(5, minmax(100px, 1fr));
     }
 
     .rolledDiceDisplay {

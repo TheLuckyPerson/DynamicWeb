@@ -24,18 +24,18 @@ function RollButton(props) {
 }
 
 function DicePickContainer(props) {
-    let color = "white"
+    let dicePickClass = "dicePickContainer"
     let selectTxt = ""
 
     if (props.selected > 0) {
-        color = "blue"
+        dicePickClass = "dicePickContainer selected"
         selectTxt = `${props.selected}x`
     }
 
     return (
-        <div className={`bg-${color}-100 dicePickContainer`}>
+        <div className={dicePickClass}>
             <DicePickDisplay
-                className="w-20 h-auto bg-white-600"
+                className="w-20 h-auto"
                 faceSize="4"
                 diceDisplay={props.roll}
             />
@@ -100,7 +100,7 @@ function DicePickDisplay(props) {
 
     return (
         <div className={`relative ${props.className}`}>
-            <img src={EmptyDice} alt="Empty Dice" className="" />
+            <img src={EmptyDice} alt="Dice" className="" />
 
             <span className={`absolute bottom-0 inset-0 flex text-${props.faceSize / 2}xl justify-center text-black font-bold`}>
                 {minMaxDisplay}
@@ -267,24 +267,25 @@ function DiceMenu(props) {
                 {rolledDice.map((dice, index) => {
                     return (
                         <DicePickDisplay
-                            key={index}
-                            className="w-40 h-auto"
-                            faceSize="9"
-                            diceDisplay={dice.val}
-                            min={dice.min}
-                            max={dice.max}
+                        key={index}
+                        className="w-40 h-auto"
+                        faceSize="9"
+                        diceDisplay={dice.val}
+                        min={dice.min}
+                        max={dice.max}
                         />
                     );
                 })}
             </div>
-            
-            <RollButton rollAction={DiceAction} />
+
             <h1 className="font-bold">Total Roll {totalRoll}</h1>
+            <RollButton rollAction={DiceAction} />
+
             {isLoading ?
                 <Spinner /> :
                 <DiceSelectionRow
-                    dices={diceSelection}
-                    addDiceCall={AddDiceSelect}>
+                dices={diceSelection}
+                addDiceCall={AddDiceSelect}>
                 </DiceSelectionRow>
             }
             <button
