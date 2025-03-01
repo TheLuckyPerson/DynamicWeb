@@ -267,12 +267,12 @@ function DiceMenu(props) {
                 {rolledDice.map((dice, index) => {
                     return (
                         <DicePickDisplay
-                        key={index}
-                        className="w-40 h-auto"
-                        faceSize="9"
-                        diceDisplay={dice.val}
-                        min={dice.min}
-                        max={dice.max}
+                            key={index}
+                            className="w-40 h-auto"
+                            faceSize="9"
+                            diceDisplay={dice.val}
+                            min={dice.min}
+                            max={dice.max}
                         />
                     );
                 })}
@@ -284,8 +284,8 @@ function DiceMenu(props) {
             {isLoading ?
                 <Spinner /> :
                 <DiceSelectionRow
-                dices={diceSelection}
-                addDiceCall={AddDiceSelect}>
+                    dices={diceSelection}
+                    addDiceCall={AddDiceSelect}>
                 </DiceSelectionRow>
             }
             <button

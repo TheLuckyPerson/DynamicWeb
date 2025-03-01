@@ -14,6 +14,7 @@ function App(props) {
       <ProjectHeader></ProjectHeader>
       <Routes>
         <Route path="/" element={<DiceMenu />} />
+        <Route path="/Project" element={<DiceMenu />} />
         <Route path="/about" element={<About />} />
       </Routes>
 
