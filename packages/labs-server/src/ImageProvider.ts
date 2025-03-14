@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 interface Image {
     _id: string;
@@ -17,43 +17,64 @@ interface User {
 export class ImageProvider {
     constructor(private readonly mongoClient: MongoClient) {}
 
-    async getAllImages(): Promise<Image[]> {
+    async getAllImages(authorId?: string): Promise<Image[]> {
         const imagesCollectionName = process.env.IMAGES_COLLECTION_NAME;
         const usersCollectionName = process.env.USERS_COLLECTION_NAME;
-
+    
         if (!imagesCollectionName || !usersCollectionName) {
             throw new Error("Missing collection names from environment variables");
         }
+    
+        const collection = this.mongoClient.db().collection(imagesCollectionName);
+    
+        const pipeline: any[] = [
+            {
+                $lookup: {
+                    from: usersCollectionName,
+                    localField: "author",
+                    foreignField: "_id",
+                    as: "authorDetails",
+                },
+            },
+            { $unwind: "$authorDetails" },
+            {
+                $project: {
+                    _id: 1,
+                    src: 1,
+                    name: 1,
+                    likes: 1,
+                    author: {
+                        _id: "$authorDetails._id",
+                        username: "$authorDetails.username",
+                        email: "$authorDetails.email",
+                    },
+                },
+            }
+        ];
+    
+        if (authorId) {
+            pipeline.unshift({ $match: { author: authorId } });
+        }
+    
+        const images = await collection.aggregate<Image>(pipeline).toArray();
+    
+        return images;
+    }
+
+    async updateImageName(imageId: string, newName: string): Promise<number> {
+        const imagesCollectionName = process.env.IMAGES_COLLECTION_NAME;
+        if (!imagesCollectionName) {
+            throw new Error("Missing collection name from environment variables");
+        }
 
         const collection = this.mongoClient.db().collection(imagesCollectionName);
+        let objectId: ObjectId;
 
-        const images = await collection
-            .aggregate<Image>([ // Explicitly specify the output type
-                {
-                    $lookup: {
-                        from: usersCollectionName,
-                        localField: "author",
-                        foreignField: "_id",
-                        as: "authorDetails",
-                    },
-                },
-                { $unwind: "$authorDetails" }, // Convert array to object
-                {
-                    $project: {
-                        _id: 1,
-                        src: 1,
-                        name: 1,
-                        likes: 1,
-                        author: {
-                            _id: "$authorDetails._id",
-                            username: "$authorDetails.username",
-                            email: "$authorDetails.email",
-                        },
-                    },
-                },
-            ])
-            .toArray();
+        const result = await collection.updateOne(
+            { _id: imageId as any }, 
+            { $set: { name: newName } }
+        );
 
-        return images;
+        return result.matchedCount;
     }
 }
