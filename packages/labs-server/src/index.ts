@@ -22,7 +22,8 @@ async function setUpSever() {
 
         const app = express();
         app.use(express.static(staticDir));
-
+        app.use("/uploads", express.static(process.env.IMAGE_UPLOAD_DIR || "uploads"));
+        
         app.use(express.json());
 
         app.get("/hello", (req: Request, res: Response) => {

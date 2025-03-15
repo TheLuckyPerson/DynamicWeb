@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import { ImageProvider } from "../ImageProvider";
 import { CredentialsProvider } from "../CredentialsProvider";
+import { imageMiddlewareFactory, handleImageFileErrors } from "./imageUploadMiddleware";
 
 export function registerImageRoutes(app: express.Application, mongoClient: MongoClient) {
     app.get("/api/images", async (req: Request, res: Response) => {
@@ -69,8 +70,64 @@ export function registerImageRoutes(app: express.Application, mongoClient: Mongo
             return;
         }
 
-
-        // If user registration is successful
         res.status(201).send();
     });
+
+    app.post(
+        "/api/images",
+        imageMiddlewareFactory.single("image"),
+        handleImageFileErrors,
+        async (req: Request, res: Response) => {
+            try {
+                // Log the incoming request details for debugging
+                console.log("File Upload Request:", req.body);  // Form data (image name, etc.)
+                console.log("File details:", req.file);  // File details (uploaded file)
+    
+                if (!req.file) {
+                    res.status(400).send({
+                        error: "Bad Request",
+                        message: "No file uploaded"
+                    });
+                    return
+                }
+    
+                if (!req.body.name) {
+                    res.status(400).send({
+                        error: "Bad Request",
+                        message: "Image name is required"
+                    });
+                    return
+                }
+    
+                // Assuming the user is authenticated and token is attached to res.locals.token
+                const user = res.locals.token;
+                if (!user) {
+                    res.status(401).send({
+                        error: "Unauthorized",
+                        message: "User not authenticated"
+                    });
+                    return
+                }
+    
+                const imageData = {
+                    _id: req.file.filename,
+                    src: `/uploads/${req.file.filename}`,
+                    name: req.body.name || "Untitled",
+                    likes: 0,
+                    author: user.username
+                };
+    
+                const imageProvider = new ImageProvider(mongoClient);
+                const newImage = await imageProvider.createImage(imageData);
+    
+                res.status(201).json(newImage);
+            } catch (error) {
+                console.error("Error processing file upload:", error);
+                res.status(500).send({
+                    error: "Internal Server Error",
+                    message: "Error processing the image upload"
+                });
+            }
+        }
+    );
 }

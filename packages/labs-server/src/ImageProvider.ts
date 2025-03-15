@@ -27,39 +27,31 @@ export class ImageProvider {
     
         const collection = this.mongoClient.db().collection(imagesCollectionName);
     
-        const pipeline: any[] = [
-            {
-                $lookup: {
-                    from: usersCollectionName,
-                    localField: "author",
-                    foreignField: "_id",
-                    as: "authorDetails",
-                },
-            },
-            { $unwind: "$authorDetails" },
-            {
-                $project: {
-                    _id: 1,
-                    src: 1,
-                    name: 1,
-                    likes: 1,
-                    author: {
-                        _id: "$authorDetails._id",
-                        username: "$authorDetails.username",
-                        email: "$authorDetails.email",
-                    },
-                },
-            }
-        ];
+        const query: any = {};
     
         if (authorId) {
-            pipeline.unshift({ $match: { author: authorId } });
+            query.author = authorId;  // Only fetch images for the given author
         }
     
-        const images = await collection.aggregate<Image>(pipeline).toArray();
+        const images = await collection.find(query, {
+            projection: {
+                _id: 1,
+                src: 1,
+                name: 1,
+                likes: 1,
+                author: 1  
+            }
+        }).toArray();
     
-        return images;
+        return images.map(image => ({
+            _id: image._id.toString(), 
+            src: image.src,
+            name: image.name,
+            likes: image.likes,
+            author: image.author.toString() 
+        }));
     }
+    
 
     async updateImageName(imageId: string, newName: string): Promise<number> {
         const imagesCollectionName = process.env.IMAGES_COLLECTION_NAME;
@@ -76,5 +68,12 @@ export class ImageProvider {
         );
 
         return result.matchedCount;
+    }
+
+    async createImage(imageData: { src: string, name: string, author: string }) {
+        const imageCollection = this.mongoClient.db().collection("images");
+
+        const result = await imageCollection.insertOne(imageData);
+        return result
     }
 }
