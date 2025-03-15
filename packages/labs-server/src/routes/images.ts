@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { MongoClient } from "mongodb";
 import { ImageProvider } from "../ImageProvider";
 import { CredentialsProvider } from "../CredentialsProvider";
-import { imageMiddlewareFactory, handleImageFileErrors } from "./imageUploadMiddleware";
+import { imageMiddlewareFactory, handleImageFileErrors } from "../imageUploadMiddleware";
 
 export function registerImageRoutes(app: express.Application, mongoClient: MongoClient) {
     app.get("/api/images", async (req: Request, res: Response) => {

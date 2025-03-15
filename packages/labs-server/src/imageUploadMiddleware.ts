@@ -19,7 +19,7 @@ function getFileExtension(mimetype: string) {
 const storageEngine = multer.diskStorage({
     destination: function (req, file, cb) {
         const uploadDir = process.env.IMAGE_UPLOAD_DIR || "uploads"; 
-        cb(null, path.join(__dirname, uploadDir)); 
+        cb(null, path.join(uploadDir)); 
     },
     filename: function (req, file, cb) {
         const fileExtension = getFileExtension(file.mimetype); 
