@@ -2,21 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const ProjectHeader = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(
-        localStorage.getItem("dark-mode") === "true"
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(
+        JSON.parse(localStorage.getItem("dark-mode") || "false")
     );
     const location = useLocation();
-    const [route, setRoute] = useState(location.pathname);
 
     useEffect(() => {
         document.body.classList.toggle("dark-mode", isDarkMode);
-        localStorage.setItem("dark-mode", isDarkMode);
+        localStorage.setItem("dark-mode", isDarkMode.toString());
     }, [isDarkMode]);
 
     useEffect(() => {
-        setIsMenuOpen(false); 
-        setRoute(location.pathname);
+        setIsMenuOpen(false);
     }, [location]);
 
     return (

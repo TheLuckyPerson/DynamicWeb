@@ -7,8 +7,9 @@ import About from "./About";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
-function App(props) {
-
+function App() {
+      const [authToken, setAuthToken] = useState(localStorage.getItem("authToken"));
+  
   return (
     <Router>
       <ProjectHeader></ProjectHeader>
@@ -16,6 +17,7 @@ function App(props) {
         <Route path="/" element={<DiceMenu />} />
         <Route path="/Project" element={<DiceMenu />} />
         <Route path="/about" element={<About />} />
+
       </Routes>
 
       {/* <About></About>
