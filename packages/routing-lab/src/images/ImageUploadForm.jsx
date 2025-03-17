@@ -75,8 +75,8 @@ export function ImageUploadForm({ authToken }) {
         }
     
         const formData = new FormData();
-        formData.append('image', file); // Append the image file
-        formData.append('name', imageName); // Append the image title
+        formData.append('image', file); 
+        formData.append('name', imageName); 
 
         try {
             const response = await fetch("/api/images", {
@@ -93,7 +93,6 @@ export function ImageUploadForm({ authToken }) {
                 return;
             }
     
-            // Optional: Get the newly created image, including the generated _id
             const newImage = await response.json();
             console.log("Uploaded image:", newImage);
     

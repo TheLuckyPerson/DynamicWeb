@@ -135,7 +135,9 @@ header {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
     border-radius: 0.25rem;
-    color: var(--color-text-button);
+    color: var(--color-text-dice);
+    background-color: var(--color-background-diceDisplay);
+
 }
 
 .dicePickContainer.selected {

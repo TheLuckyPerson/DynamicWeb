@@ -1,7 +1,7 @@
 import { random } from "nanoid";
 import EmptyDice from "./assets/EmptyDice.svg";
 import React, { useEffect, useState } from 'react';
-import { Spinner } from "./Spinner";
+import DiceConfigMenu from "./DiceConfigMenu";
 
 // Delay function
 function delayMs(ms: number): Promise<void> {
@@ -61,7 +61,7 @@ function DicePickContainer(props: DicePickContainerProps) {
                 </button>
             </div>
 
-            <span className="absolute top-0 right-0 text-xl font-bold text-black">
+            <span className="absolute top-0 right-0 text-xl font-bold text-white">
                 {selectTxt}
             </span>
         </div>
@@ -85,7 +85,7 @@ function DicePickDisplay(props: DicePickDisplayProps) {
     }
 
     return (
-        <div className={`relative ${props.className}`}>
+        <div className={`relative ${props.className} color-white`}>
             <img src={EmptyDice} alt="Dice" className="" />
 
             <span
@@ -133,7 +133,11 @@ function DiceSelectionRow(props: DiceSelectionRowProps) {
 }
 
 // DiceMenu component
-type DiceMenuProps = {};
+type DiceMenuProps = {
+    authToken: string
+    fetchedDices: any
+    isLoading: boolean
+};
 
 type Dice = {
     min: number;
@@ -148,7 +152,6 @@ type RolledDice = {
 };
 
 function DiceMenu(props: DiceMenuProps) {
-    const [isLoading, setLoading] = useState<boolean>(true);
     const [diceSelection, setDiceSelection] = useState<Dice[]>([]);
     const [totalRoll, setTotalRoll] = useState<number>(0);
     const [rolledDice, setRolledDice] = useState<RolledDice[]>([]);
@@ -156,8 +159,6 @@ function DiceMenu(props: DiceMenuProps) {
     useEffect(() => {
         async function fetchData() {
             try {
-                setLoading(true);
-                await delayMs(1000);
                 setDiceSelection([
                     { min: 1, max: 6, selectAmt: 0 },
                     { min: 1, max: 4, selectAmt: 0 },
@@ -168,8 +169,6 @@ function DiceMenu(props: DiceMenuProps) {
                 ]);
             } catch (error) {
                 console.error(error);
-            } finally {
-                setLoading(false);
             }
         }
 
@@ -189,6 +188,38 @@ function DiceMenu(props: DiceMenuProps) {
         setDiceSelection(updatedSelection);
         setRolledDice([]);
         setTotalRoll(0);
+    }
+
+    function SetDiceFromMenu(selections: number[])
+    {
+        const newSelection = [...diceSelection];
+        const updatedSelection = newSelection.map((dice, idx) => ({
+            ...dice,
+            selectAmt: selections[idx],
+        }));
+        setDiceSelection(updatedSelection);
+
+
+        const diceDisplay: RolledDice[] = [];
+
+        updatedSelection.forEach((dice) => {
+            for (let i = 0; i < dice.selectAmt; i++) {
+                let rand = RollDie(dice.min, dice.max);
+                diceDisplay.push({
+                    min: dice.min,
+                    max: dice.max,
+                    val: rand,
+                });
+            }
+        });
+
+        setRolledDice(diceDisplay);
+
+        let total = 0;
+        for (let i = 0; i < diceDisplay.length; i++) {
+            total += diceDisplay[i].val;
+        }
+        setTotalRoll(total);
     }
 
     function AddDiceSelect(idx: number, amt: number) {
@@ -263,21 +294,30 @@ function DiceMenu(props: DiceMenuProps) {
                         diceDisplay={dice.val.toString()}
                         min={dice.min}
                         max={dice.max}
+
                     />
                 ))}
             </div>
 
             <h1 className="font-bold">Total Roll {totalRoll}</h1>
             <RollButton rollAction={DiceAction} />
-
-            {isLoading ? (
-                <Spinner />
-            ) : (
-                <DiceSelectionRow
-                    dices={diceSelection}
-                    addDiceCall={AddDiceSelect}
-                />
-            )}
+            {props.authToken ? (
+                <DiceConfigMenu
+                    authToken={props.authToken}
+                    fetchedDices={props.fetchedDices}
+                    isLoading={props.isLoading} 
+                    diceSelection={diceSelection}
+                    setDiceSelect={SetDiceFromMenu}
+                    />
+            ) :
+                <h1 className="text-red-500 font-bold">
+                    Please sign in to save your dice configurations.
+                </h1>
+            }
+            <DiceSelectionRow
+                dices={diceSelection}
+                addDiceCall={AddDiceSelect}
+            />
 
             <button className="button" onClick={ResetDiceSelect}>
                 Reset Selection

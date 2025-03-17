@@ -9,7 +9,7 @@ export async function sendPostRequest(url, payload) {
         });
 
         if (!response.ok) {
-            if(response.status === 400) {
+            if (response.status === 400) {
                 return { type: 'error', message: 'User already exists' };
             }
 
@@ -21,10 +21,15 @@ export async function sendPostRequest(url, payload) {
                 return { type: 'error', message: `Unexpected error: ${response.status}` };
             }
         }
+        if (url.includes("login")) {
+            const data = await response.json();
+            return { type: 'success', message: 'Login successful.', token: data.token };
+        } else {
+            return { type: 'success', message: 'Login successful.' };
 
-        const data = await response.json();
-        return { type: 'success', message: 'Login successful.', token: data.token };
+        }
     } catch (error) {
+        console.log(error)
         return { type: 'error', message: 'Network error. Please try again.' };
     }
 }

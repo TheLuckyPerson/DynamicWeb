@@ -51,8 +51,30 @@ export function registerAuthRoutes(app: express.Application, mongoClient: MongoC
         });
     }
 
-    app.post("/auth/register", (req, res) => {
-        res.send("register request received");
+    app.post("/auth/register", async (req: Request, res: Response) => {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            res.status(400).send({
+                error: "Bad request",
+                message: "Missing username or password"
+            });
+            return;
+        }
+
+        const credentialsProvider = new CredentialsProvider(mongoClient);
+
+        const userStatus = await credentialsProvider.registerUser(username, password);
+
+        if (!userStatus) {
+            res.status(400).send({
+                error: "Bad request",
+                message: "Username already taken"
+            });
+            return;
+        }
+
+        res.status(201).send();
     });
 
     app.post("/auth/login", async (req, res) => {

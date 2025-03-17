@@ -47,41 +47,14 @@ export function registerImageRoutes(app: express.Application, mongoClient: Mongo
         res.status(204).send();
     });
 
-    app.post("/auth/register", async (req: Request, res: Response) => {
-        const { username, password } = req.body;
-
-        if (!username || !password) {
-            res.status(400).send({
-                error: "Bad request",
-                message: "Missing username or password"
-            });
-            return;
-        }
-
-        const credentialsProvider = new CredentialsProvider(mongoClient);
-
-        const userStatus = await credentialsProvider.registerUser(username, password);
-
-        if (!userStatus) {
-            res.status(400).send({
-                error: "Bad request",
-                message: "Username already taken"
-            });
-            return;
-        }
-
-        res.status(201).send();
-    });
-
     app.post(
         "/api/images",
         imageMiddlewareFactory.single("image"),
         handleImageFileErrors,
         async (req: Request, res: Response) => {
             try {
-                // Log the incoming request details for debugging
-                console.log("File Upload Request:", req.body);  // Form data (image name, etc.)
-                console.log("File details:", req.file);  // File details (uploaded file)
+                console.log("File Upload Request:", req.body);  
+                console.log("File details:", req.file); 
     
                 if (!req.file) {
                     res.status(400).send({
@@ -99,7 +72,6 @@ export function registerImageRoutes(app: express.Application, mongoClient: Mongo
                     return
                 }
     
-                // Assuming the user is authenticated and token is attached to res.locals.token
                 const user = res.locals.token;
                 if (!user) {
                     res.status(401).send({

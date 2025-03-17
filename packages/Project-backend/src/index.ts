@@ -5,6 +5,7 @@ import { MongoClient } from "mongodb";
 import { ImageProvider } from "./ImageProvider";
 import { registerImageRoutes } from "./routes/images";
 import { registerAuthRoutes, verifyAuthToken } from "./routes/auth";
+import { registerDiceRoutes } from "./routes/dices";
 
 dotenv.config(); // Read the .env file in the current working directory, and load values into process.env.
 const PORT = process.env.PORT || 3000;
@@ -26,12 +27,9 @@ async function setUpSever() {
         
         app.use(express.json());
 
-        app.get("/hello", (req: Request, res: Response) => {
-            res.send("Hello, World");
-        });
-
         app.use("/api/*", verifyAuthToken);
-        registerImageRoutes(app, mongoClient);
+        // registerImageRoutes(app, mongoClient);
+        registerDiceRoutes(app, mongoClient);
         registerAuthRoutes(app, mongoClient);
 
         app.get("*", (req: Request, res: Response) => {

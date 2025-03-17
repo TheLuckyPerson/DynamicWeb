@@ -1,28 +1,30 @@
 :root {
-    --color-background-page: #D7F5EA;
-    --color-font-page: #3c7fd1;
-    --color-background-header: #3c7fd1;
-    --color-font-header: #357531;
+    --color-background-page: #dcded0;
+    --color-font-page: #2A4D69;
+    --color-background-header: #1E3A8A;
+    --color-font-header: #0a0101;
     --color-underline-header: #000000;
-    --color-font-link: #753231;
-    --color-background-nav: #61be77;
-    --color-button: #1D4ED8;
-    --color-background-diceDisplay: #9CA3AF;
-    --color-text-button: white;
-    --color-font-nav: #3c7fd1;
-    --color-background-dicepick: #3c7fd1;
-    --size-font-page: 1em;
+    --color-font-link: #192c11;
+    --color-background-nav: #10B981;
+    --color-button: #2563EB;
+    --color-background-diceDisplay: #a9acb1;
+    --color-text-button: #FFFFFF;
+    --color-font-nav: #FFFFFF;
+    --color-background-dicepick: #2563EB;
+    --color-text-dice: #F3F4F6;
+    --size-font-page: 1.1em;
     --font-font-title: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     --font-font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
 body.dark-mode {
-    --color-background-page: #091B22; 
-    --color-font-page: #E0F5FF; 
-    --color-background-header: #0A2953; 
-    --color-font-header: #B3ECA1; 
-    --color-underline-header: #FFFFFF; 
-    --color-font-link: #FF927A; 
-    --color-background-nav: #124E2F; 
-    --color-font-nav: #91C3F5; 
+    --color-background-page: #091B22;
+    --color-font-page: #E0F5FF;
+    --color-background-header: #0A2953;
+    --color-font-header: #B3ECA1;
+    --color-underline-header: #FFFFFF;
+    --color-font-link: #FF927A;
+    --color-background-nav: #124E2F;
+    --color-font-nav: #91C3F5;
 }

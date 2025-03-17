@@ -28,7 +28,7 @@ export function UsernamePasswordForm(props) {
         <p className={`message ${result.type} text-red-500`}>{result.message}</p>
       )}
       {isPending && <p className="message loading">Loading ...</p>}
-      <form action={submitAction} className="p-4 bg-gray-100 rounded-lg w-80">
+      <form action={submitAction} className="p-4 rounded-lg w-80">
         <div className="mb-4">
           <label htmlFor="username" className="block mb-1">Username</label>
           <input
