@@ -176,7 +176,6 @@ header {
     display: grid;
     margin: 1em;
     padding: 1.25rem;
-    grid-template-columns: 1;
     gap: 1rem;
     background-color: var(--color-background-diceDisplay);
 }
