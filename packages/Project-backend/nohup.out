@@ -209,3 +209,151 @@ npm ERR! Lifecycle script `start` failed with error:
 npm ERR! Error: command failed 
 npm ERR!   in workspace: labs-server@1.0.0 
 npm ERR!   at location: /home/tle153/DynamicWeb/packages/labs-server 
+
+> Project-backend@1.0.0 start
+> npm run build && node dist/index.js
+
+
+> Project-backend@1.0.0 build
+> npx tsc
+
+
+> Project-backend@1.0.0 start
+> npm run build && node dist/index.js
+
+
+> Project-backend@1.0.0 build
+> npx tsc
+
+Server running at http://localhost:3000
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1898:16)
+    at listenInCluster (node:net:1946:12)
+    at Server.listen (node:net:2044:7)
+    at Function.listen (/home/tle153/DynamicWeb/node_modules/express/lib/application.js:635:24)
+    at setUpSever (/home/tle153/DynamicWeb/packages/Project-backend/dist/index.js:34:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1925:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v20.13.1
+npm ERR! Lifecycle script `start` failed with error: 
+npm ERR! Error: command failed 
+npm ERR!   in workspace: Project-backend@1.0.0 
+npm ERR!   at location: /home/tle153/DynamicWeb/packages/Project-backend 
+
+> Project-backend@1.0.0 start
+> npm run build && node dist/index.js
+
+
+> Project-backend@1.0.0 build
+> npx tsc
+
+none of the routes above me were matched
+Error: ENOENT: no such file or directory, stat '/home/tle153/DynamicWeb/packages/Project/dist/index.html'
+none of the routes above me were matched
+Error: ENOENT: no such file or directory, stat '/home/tle153/DynamicWeb/packages/Project/dist/index.html'
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1898:16)
+    at listenInCluster (node:net:1946:12)
+    at Server.listen (node:net:2044:7)
+    at Function.listen (/home/tle153/DynamicWeb/node_modules/express/lib/application.js:635:24)
+    at setUpSever (/home/tle153/DynamicWeb/packages/Project-backend/dist/index.js:34:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1925:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v20.13.1
+npm ERR! Lifecycle script `start` failed with error: 
+npm ERR! Error: command failed 
+npm ERR!   in workspace: Project-backend@1.0.0 
+npm ERR!   at location: /home/tle153/DynamicWeb/packages/Project-backend 
+
+> Project-backend@1.0.0 start
+> npm run build && node dist/index.js
+
+
+> Project-backend@1.0.0 build
+> npx tsc
+
+none of the routes above me were matched
+Error: ENOENT: no such file or directory, stat '/home/tle153/DynamicWeb/packages/Project/dist/index.html'
+none of the routes above me were matched
+Error: ENOENT: no such file or directory, stat '/home/tle153/DynamicWeb/packages/Project/dist/index.html'
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1898:16)
+    at listenInCluster (node:net:1946:12)
+    at Server.listen (node:net:2044:7)
+    at Function.listen (/home/tle153/DynamicWeb/node_modules/express/lib/application.js:635:24)
+    at setUpSever (/home/tle153/DynamicWeb/packages/Project-backend/dist/index.js:34:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1925:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v20.13.1
+npm ERR! Lifecycle script `start` failed with error: 
+npm ERR! Error: command failed 
+npm ERR!   in workspace: Project-backend@1.0.0 
+npm ERR!   at location: /home/tle153/DynamicWeb/packages/Project-backend 
+
+> Project-backend@1.0.0 start
+> npm run build && node dist/index.js
+
+
+> Project-backend@1.0.0 build
+> npx tsc
+
+none of the routes above me were matched
+Error: ENOENT: no such file or directory, stat '/home/tle153/DynamicWeb/packages/Project/dist/index.html'
+Killed
+npm ERR! Lifecycle script `start` failed with error: 
+npm ERR! Error: command failed 
+npm ERR!   in workspace: Project-backend@1.0.0 
+npm ERR!   at location: /home/tle153/DynamicWeb/packages/Project-backend 
+
+> Project-backend@1.0.0 start
+> npm run build && node dist/index.js
+
+
+> Project-backend@1.0.0 build
+> npx tsc
+
+Server running at http://localhost:3000
+Killed
+npm ERR! Lifecycle script `start` failed with error: 
+npm ERR! Error: command failed 
+npm ERR!   in workspace: Project-backend@1.0.0 
+npm ERR!   at location: /home/tle153/DynamicWeb/packages/Project-backend 
